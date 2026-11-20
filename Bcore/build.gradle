@@ -1,4 +1,5 @@
 apply plugin: 'com.android.library'
+apply plugin: 'maven-publish'
 
 android {
     compileSdkVersion 28
@@ -76,4 +77,17 @@ dependencies {
     implementation project(':Bcore:pine-core')
     implementation project(':Bcore:pine-xposed')
     implementation project(':Bcore:pine-xposed-res')
+}
+
+afterEvaluate {
+    publishing {
+        publications {
+            release(MavenPublication) {
+                from components.release
+                groupId = 'com.github.cold4u'
+                artifactId = 'CCore'
+                version = 'v1.0.0'
+            }
+        }
+    }
 }
