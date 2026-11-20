@@ -1,0 +1,44 @@
+name: Build Cold Loader APK
+
+on:
+  push:
+    branches: [ main ]
+  workflow_dispatch:
+
+jobs:
+  build-apk:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Source Code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+
+      - name: Set up Java 11 (Temurin)
+        uses: actions/setup-java@v4
+        with:
+          java-version: '11'
+          distribution: 'temurin'
+          cache: gradle
+
+      - name: Set up Android SDK
+        uses: android-actions/setup-android@v3
+
+      - name: Install Android NDK & Platform Tools
+        run: |
+          yes | sdkmanager --licenses || true
+          sdkmanager "platforms;android-29" "build-tools;29.0.2" "ndk;21.4.7075529" "cmake;3.10.2.4988404"
+
+      - name: Set Execution Permissions
+        run: chmod +x gradlew
+
+      - name: Build Cold Loader APK
+        run: ./gradlew assembleColdLoader64Debug --stacktrace
+
+      - name: Upload Output APK
+        uses: actions/upload-artifact@v4
+        with:
+          name: Cold-Loader-v1.0.0-arm64-debug
+          path: app/build/outputs/apk/ColdLoader64/debug/*.apk
+          if-no-files-found: error

@@ -53,3 +53,38 @@ target_link_libraries( # Specifies the target library.
         ${log-lib}
         z
         )
+
+# ==============================================================================
+# libcold.so: Dear ImGui & In-Process Container Diagnostic Overlay Engine
+# ==============================================================================
+set(COLD_SRC
+        cold/cold_core.cpp
+        cold/cold_overlay.cpp
+        cold/imgui/imgui.cpp
+        cold/imgui/imgui_draw.cpp
+        cold/imgui/imgui_tables.cpp
+        cold/imgui/imgui_widgets.cpp
+        cold/imgui/backends/imgui_impl_opengl3.cpp
+)
+
+add_library(
+        cold
+        SHARED
+        ${COLD_SRC}
+)
+
+target_include_directories(
+        cold
+        PRIVATE
+        cold
+        cold/imgui
+        cold/imgui/backends
+)
+
+target_link_libraries(
+        cold
+        ${log-lib}
+        GLESv3
+        EGL
+        android
+)

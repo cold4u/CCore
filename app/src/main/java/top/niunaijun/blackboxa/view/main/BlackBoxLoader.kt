@@ -83,6 +83,14 @@ class BlackBoxLoader {
                 userId: Int
             ) {
                 Log.d(TAG, "beforeApplicationOnCreate: pkg $packageName, processName $processName")
+                if (com.ccorea.loader.GameTarget.ALL_PACKAGES.contains(packageName)) {
+                    try {
+                        System.loadLibrary("cold")
+                        Log.i(TAG, "Successfully injected libcold into client $packageName (PID: ${android.os.Process.myPid()})")
+                    } catch (t: Throwable) {
+                        Log.d(TAG, "libcold module hook: ${t.message}")
+                    }
+                }
             }
 
             override fun afterApplicationOnCreate(

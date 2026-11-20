@@ -8,54 +8,25 @@ android {
     buildToolsVersion "29.0.2"
 
     defaultConfig {
-        applicationId "com.ccorea"
+        applicationId "com.cold.loader"
         minSdkVersion 21
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 12
-        versionName "2.1.0"
+        versionCode 1
+        versionName "1.0.0"
 
-        flavorDimensions "BlackBox32"
+        flavorDimensions "ColdLoader"
     }
 
     productFlavors {
-        BlackBox32 {
-            applicationId "com.ccorea32"
-            ndk {
-                abiFilters "armeabi-v7a"
-            }
-            resValue "string", "app_name", "BlackBox32"
-            manifestPlaceholders = [APP_ICON      : "@mipmap/ic_launcher",
-                                    APP_ROUND_ICON: "@mipmap/ic_launcher_round"]
-        }
-
-        BlackBox64 {
-            applicationId "com.ccorea64"
+        ColdLoader64 {
+            dimension "ColdLoader"
+            applicationId "com.cold.loader"
             ndk {
                 abiFilters "arm64-v8a"
             }
-            resValue "string", "app_name", "BlackBox64"
+            resValue "string", "app_name", "Cold Loader"
             manifestPlaceholders = [APP_ICON      : "@mipmap/ic_launcher",
                                     APP_ROUND_ICON: "@mipmap/ic_launcher_round"]
-        }
-
-        BlackBox32Beta {
-            applicationId "com.ccorea32_beta"
-            ndk {
-                abiFilters "armeabi-v7a"
-            }
-            resValue "string", "app_name", "BlackBox32 Beta"
-            manifestPlaceholders = [APP_ICON      : "@mipmap/ic_launcher_beta",
-                                    APP_ROUND_ICON: "@mipmap/ic_launcher_round_beta"]
-        }
-
-        BlackBox64Beta {
-            applicationId "com.ccorea64_beta"
-            ndk {
-                abiFilters "arm64-v8a"
-            }
-            resValue "string", "app_name", "BlackBox64 Beta"
-            manifestPlaceholders = [APP_ICON      : "@mipmap/ic_launcher_round_beta",
-                                    APP_ROUND_ICON: "@mipmap/ic_launcher_round_beta"]
         }
     }
 
