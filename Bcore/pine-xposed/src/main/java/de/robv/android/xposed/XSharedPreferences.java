@@ -314,7 +314,7 @@ public final class XSharedPreferences implements SharedPreferences {
 
 	public static File getXSharedPreferences(String packageName, String prefFileName) {
 		try {
-			Class<?> bEnvironment = XSharedPreferences.class.getClassLoader().loadClass("top.niunaijun.blackbox.core.env.BEnvironment");
+			Class<?> bEnvironment = XSharedPreferences.class.getClassLoader().loadClass("com.ccore.core.env.BEnvironment");
 			Method getXSharedPreferences = bEnvironment.getDeclaredMethod("getXSharedPreferences", String.class, String.class);
 			getXSharedPreferences.setAccessible(true);
 			return (File) getXSharedPreferences.invoke(null, packageName, prefFileName);

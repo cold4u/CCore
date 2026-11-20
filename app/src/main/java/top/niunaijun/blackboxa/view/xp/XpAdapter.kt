@@ -1,12 +1,12 @@
-package top.niunaijun.blackboxa.view.xp
+package com.ccorea.view.xp
 
 import android.view.View
 import android.view.ViewGroup
 import cbfg.rvadapter.RVHolder
 import cbfg.rvadapter.RVHolderFactory
-import top.niunaijun.blackboxa.R
-import top.niunaijun.blackboxa.bean.XpModuleInfo
-import top.niunaijun.blackboxa.databinding.ItemXpBinding
+import com.ccorea.R
+import com.ccorea.bean.XpModuleInfo
+import com.ccorea.databinding.ItemXpBinding
 
 
 /**

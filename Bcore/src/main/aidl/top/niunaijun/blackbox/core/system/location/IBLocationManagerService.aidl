@@ -1,8 +1,8 @@
 // IFakeLocationManager.aidl
-package top.niunaijun.blackbox.core.system.location;
+package com.ccore.core.system.location;
 
-import top.niunaijun.blackbox.entity.location.BLocation;
-import top.niunaijun.blackbox.entity.location.BCell;
+import com.ccore.entity.location.BLocation;
+import com.ccore.entity.location.BCell;
 
 import java.util.List;
 

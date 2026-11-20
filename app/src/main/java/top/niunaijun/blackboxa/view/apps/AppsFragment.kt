@@ -1,4 +1,4 @@
-package top.niunaijun.blackboxa.view.apps
+package com.ccorea.view.apps
 
 import android.graphics.Point
 import android.os.Bundle
@@ -15,16 +15,16 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.ItemTouchHelper
 import cbfg.rvadapter.RVAdapter
 import com.afollestad.materialdialogs.MaterialDialog
-import top.niunaijun.blackbox.BlackBoxCore
-import top.niunaijun.blackboxa.R
-import top.niunaijun.blackboxa.bean.AppInfo
-import top.niunaijun.blackboxa.databinding.FragmentAppsBinding
-import top.niunaijun.blackboxa.util.InjectionUtil
-import top.niunaijun.blackboxa.util.ShortcutUtil
-import top.niunaijun.blackboxa.util.inflate
-import top.niunaijun.blackboxa.util.toast
-import top.niunaijun.blackboxa.view.base.LoadingActivity
-import top.niunaijun.blackboxa.view.main.MainActivity
+import com.ccore.CCoreCore
+import com.ccorea.R
+import com.ccorea.bean.AppInfo
+import com.ccorea.databinding.FragmentAppsBinding
+import com.ccorea.util.InjectionUtil
+import com.ccorea.util.ShortcutUtil
+import com.ccorea.util.inflate
+import com.ccorea.util.toast
+import com.ccorea.view.base.LoadingActivity
+import com.ccorea.view.main.MainActivity
 import java.util.*
 import kotlin.math.abs
 
@@ -263,7 +263,7 @@ class AppsFragment : Fragment() {
             title(R.string.app_stop)
             message(text = getString(R.string.app_stop_hint,info.name))
             positiveButton(R.string.done) {
-                BlackBoxCore.get().stopPackage(info.packageName, userID)
+                CCoreCore.get().stopPackage(info.packageName, userID)
                 toast(getString(R.string.is_stop,info.name))
             }
             negativeButton(R.string.cancel)

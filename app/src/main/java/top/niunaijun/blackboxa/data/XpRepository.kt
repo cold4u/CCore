@@ -1,13 +1,13 @@
-package top.niunaijun.blackboxa.data
+package com.ccorea.data
 
 import android.net.Uri
 import android.webkit.URLUtil
 import androidx.lifecycle.MutableLiveData
-import top.niunaijun.blackbox.BlackBoxCore
-import top.niunaijun.blackbox.BlackBoxCore.getPackageManager
-import top.niunaijun.blackboxa.R
-import top.niunaijun.blackboxa.bean.XpModuleInfo
-import top.niunaijun.blackboxa.util.getString
+import com.ccore.CCoreCore
+import com.ccore.CCoreCore.getPackageManager
+import com.ccorea.R
+import com.ccorea.bean.XpModuleInfo
+import com.ccorea.util.getString
 
 /**
  *
@@ -17,7 +17,7 @@ import top.niunaijun.blackboxa.util.getString
  */
 class XpRepository {
     fun getInstallModules(modulesLiveData: MutableLiveData<List<XpModuleInfo>>) {
-        val moduleList = BlackBoxCore.get().installedXPModules
+        val moduleList = CCoreCore.get().installedXPModules
         val result = mutableListOf<XpModuleInfo>()
         moduleList.forEach {
             val info = XpModuleInfo(
@@ -35,7 +35,7 @@ class XpRepository {
     }
 
     fun installModule(source: String, resultLiveData: MutableLiveData<String>) {
-        val blackBoxCore = BlackBoxCore.get()
+        val blackBoxCore = CCoreCore.get()
 
         val installResult = if (URLUtil.isValidUrl(source)) {
             val uri = Uri.parse(source)
@@ -53,7 +53,7 @@ class XpRepository {
     }
 
     fun unInstallModule(packageName: String, resultLiveData: MutableLiveData<String>) {
-        BlackBoxCore.get().uninstallXPModule(packageName)
+        CCoreCore.get().uninstallXPModule(packageName)
         resultLiveData.postValue(getString(R.string.remove_success))
     }
 }

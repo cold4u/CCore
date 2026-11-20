@@ -1,4 +1,4 @@
-package top.niunaijun.blackboxa.app.rocker
+package com.ccorea.app.rocker
 
 import android.app.Activity
 import android.app.Application
@@ -8,10 +8,10 @@ import android.widget.FrameLayout
 import android.widget.RelativeLayout
 import com.imuxuan.floatingview.FloatingMagnetView
 import com.imuxuan.floatingview.FloatingView
-import top.niunaijun.blackbox.entity.location.BLocation
-import top.niunaijun.blackbox.fake.frameworks.BLocationManager
-import top.niunaijun.blackboxa.app.App
-import top.niunaijun.blackboxa.widget.EnFloatView
+import com.ccore.entity.location.BLocation
+import com.ccore.fake.frameworks.BLocationManager
+import com.ccorea.app.App
+import com.ccorea.widget.EnFloatView
 import kotlin.math.cos
 import kotlin.math.sin
 

@@ -1,12 +1,12 @@
-package top.niunaijun.blackboxa.view.setting
+package com.ccorea.view.setting
 
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import top.niunaijun.blackboxa.R
-import top.niunaijun.blackboxa.databinding.ActivitySettingBinding
-import top.niunaijun.blackboxa.util.inflate
-import top.niunaijun.blackboxa.view.base.BaseActivity
+import com.ccorea.R
+import com.ccorea.databinding.ActivitySettingBinding
+import com.ccorea.util.inflate
+import com.ccorea.view.base.BaseActivity
 
 class SettingActivity : BaseActivity() {
 

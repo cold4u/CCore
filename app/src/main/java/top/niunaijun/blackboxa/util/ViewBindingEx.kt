@@ -1,4 +1,4 @@
-package top.niunaijun.blackboxa.util
+package com.ccorea.util
 
 import android.app.Activity
 import android.app.Dialog

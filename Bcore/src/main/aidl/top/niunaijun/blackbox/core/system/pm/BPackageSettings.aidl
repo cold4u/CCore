@@ -1,5 +1,5 @@
 // BPackageSettings.aidl
-package top.niunaijun.blackbox.core.system.pm;
+package com.ccore.core.system.pm;
 
 // Declare any non-default types here with import statements
 

@@ -1,10 +1,10 @@
-package top.niunaijun.blackboxa.view.gms
+package com.ccorea.view.gms
 
 import androidx.lifecycle.MutableLiveData
-import top.niunaijun.blackboxa.bean.GmsBean
-import top.niunaijun.blackboxa.bean.GmsInstallBean
-import top.niunaijun.blackboxa.data.GmsRepository
-import top.niunaijun.blackboxa.view.base.BaseViewModel
+import com.ccorea.bean.GmsBean
+import com.ccorea.bean.GmsInstallBean
+import com.ccorea.data.GmsRepository
+import com.ccorea.view.base.BaseViewModel
 
 /**
  *

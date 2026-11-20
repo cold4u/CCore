@@ -1,14 +1,14 @@
-package top.niunaijun.blackboxa.view.fake
+package com.ccorea.view.fake
 
 import android.view.View
 import android.view.ViewGroup
 import cbfg.rvadapter.RVHolder
 import cbfg.rvadapter.RVHolderFactory
-import top.niunaijun.blackbox.fake.frameworks.BLocationManager
-import top.niunaijun.blackboxa.R
-import top.niunaijun.blackboxa.bean.FakeLocationBean
-import top.niunaijun.blackboxa.databinding.ItemFakeBinding
-import top.niunaijun.blackboxa.util.getString
+import com.ccore.fake.frameworks.BLocationManager
+import com.ccorea.R
+import com.ccorea.bean.FakeLocationBean
+import com.ccorea.databinding.ItemFakeBinding
+import com.ccorea.util.getString
 
 /**
  *

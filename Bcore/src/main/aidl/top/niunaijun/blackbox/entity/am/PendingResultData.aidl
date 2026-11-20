@@ -1,3 +1,3 @@
-package top.niunaijun.blackbox.entity.am;
+package com.ccore.entity.am;
 
 parcelable PendingResultData;

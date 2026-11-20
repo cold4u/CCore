@@ -1,12 +1,12 @@
-package top.niunaijun.blackboxa.view.gms
+package com.ccorea.view.gms
 
 import android.view.View
 import android.view.ViewGroup
 import cbfg.rvadapter.RVHolder
 import cbfg.rvadapter.RVHolderFactory
-import top.niunaijun.blackboxa.R
-import top.niunaijun.blackboxa.bean.GmsBean
-import top.niunaijun.blackboxa.databinding.ItemGmsBinding
+import com.ccorea.R
+import com.ccorea.bean.GmsBean
+import com.ccorea.databinding.ItemGmsBinding
 
 /**
  *

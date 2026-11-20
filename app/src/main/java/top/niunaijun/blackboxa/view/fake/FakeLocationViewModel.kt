@@ -1,10 +1,10 @@
-package top.niunaijun.blackboxa.view.fake
+package com.ccorea.view.fake
 
 import androidx.lifecycle.MutableLiveData
-import top.niunaijun.blackbox.entity.location.BLocation
-import top.niunaijun.blackboxa.bean.FakeLocationBean
-import top.niunaijun.blackboxa.data.FakeLocationRepository
-import top.niunaijun.blackboxa.view.base.BaseViewModel
+import com.ccore.entity.location.BLocation
+import com.ccorea.bean.FakeLocationBean
+import com.ccorea.data.FakeLocationRepository
+import com.ccorea.view.base.BaseViewModel
 
 /**
  *

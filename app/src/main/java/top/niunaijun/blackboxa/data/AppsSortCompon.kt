@@ -1,4 +1,4 @@
-package top.niunaijun.blackboxa.data
+package com.ccorea.data
 
 import android.content.pm.ApplicationInfo
 

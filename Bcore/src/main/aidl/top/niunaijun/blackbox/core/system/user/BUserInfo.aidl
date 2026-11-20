@@ -1,5 +1,5 @@
 // BUserInfo.aidl
-package top.niunaijun.blackbox.core.system.user;
+package com.ccore.core.system.user;
 
 // Declare any non-default types here with import statements
 parcelable BUserInfo;

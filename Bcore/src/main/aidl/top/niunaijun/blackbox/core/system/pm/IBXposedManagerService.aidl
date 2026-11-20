@@ -1,9 +1,9 @@
 // IBXposedManagerService.aidl
 
-package top.niunaijun.blackbox.core.system.pm;
+package com.ccore.core.system.pm;
 
 import java.util.List;
-import top.niunaijun.blackbox.entity.pm.InstalledModule;
+import com.ccore.entity.pm.InstalledModule;
 
 interface IBXposedManagerService {
     boolean isXPEnable();

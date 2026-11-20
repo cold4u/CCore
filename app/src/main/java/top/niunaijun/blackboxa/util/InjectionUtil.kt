@@ -1,14 +1,14 @@
-package top.niunaijun.blackboxa.util
+package com.ccorea.util
 
-import top.niunaijun.blackboxa.data.AppsRepository
-import top.niunaijun.blackboxa.data.FakeLocationRepository
-import top.niunaijun.blackboxa.data.GmsRepository
-import top.niunaijun.blackboxa.data.XpRepository
-import top.niunaijun.blackboxa.view.apps.AppsFactory
-import top.niunaijun.blackboxa.view.fake.FakeLocationFactory
-import top.niunaijun.blackboxa.view.gms.GmsFactory
-import top.niunaijun.blackboxa.view.list.ListFactory
-import top.niunaijun.blackboxa.view.xp.XpFactory
+import com.ccorea.data.AppsRepository
+import com.ccorea.data.FakeLocationRepository
+import com.ccorea.data.GmsRepository
+import com.ccorea.data.XpRepository
+import com.ccorea.view.apps.AppsFactory
+import com.ccorea.view.fake.FakeLocationFactory
+import com.ccorea.view.gms.GmsFactory
+import com.ccorea.view.list.ListFactory
+import com.ccorea.view.xp.XpFactory
 
 /**
  *

@@ -1,4 +1,4 @@
-package top.niunaijun.blackboxa.view.xp
+package com.ccorea.view.xp
 
 import android.content.Context
 import android.content.Intent
@@ -9,15 +9,15 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import cbfg.rvadapter.RVAdapter
 import com.afollestad.materialdialogs.MaterialDialog
-import top.niunaijun.blackbox.BlackBoxCore
-import top.niunaijun.blackboxa.R
-import top.niunaijun.blackboxa.bean.XpModuleInfo
-import top.niunaijun.blackboxa.databinding.ActivityXpBinding
-import top.niunaijun.blackboxa.util.InjectionUtil
-import top.niunaijun.blackboxa.util.inflate
-import top.niunaijun.blackboxa.util.toast
-import top.niunaijun.blackboxa.view.base.LoadingActivity
-import top.niunaijun.blackboxa.view.list.ListActivity
+import com.ccore.CCoreCore
+import com.ccorea.R
+import com.ccorea.bean.XpModuleInfo
+import com.ccorea.databinding.ActivityXpBinding
+import com.ccorea.util.InjectionUtil
+import com.ccorea.util.inflate
+import com.ccorea.util.toast
+import com.ccorea.view.base.LoadingActivity
+import com.ccorea.view.list.ListActivity
 
 /**
  *
@@ -73,7 +73,7 @@ class XpActivity : LoadingActivity() {
             mAdapter = RVAdapter<XpModuleInfo>(this, XpAdapter()).bind(viewBinding.recyclerView)
                 .setItemClickListener { view, item, position ->
                     item.enable = !item.enable
-                    BlackBoxCore.get().setModuleEnable(item.packageName, item.enable)
+                    CCoreCore.get().setModuleEnable(item.packageName, item.enable)
                     mAdapter.replaceAt(position, item)
                     toast(R.string.restart_module)
                 }.setItemLongClickListener { _, item, _ ->

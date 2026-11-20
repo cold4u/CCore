@@ -1,8 +1,8 @@
 // IBPackageInstallerService.aidl
-package top.niunaijun.blackbox.core.system.pm;
+package com.ccore.core.system.pm;
 
-import top.niunaijun.blackbox.core.system.pm.BPackageSettings;
-import top.niunaijun.blackbox.entity.pm.InstallOption;
+import com.ccore.core.system.pm.BPackageSettings;
+import com.ccore.entity.pm.InstallOption;
 
 // Declare any non-default types here with import statements
 

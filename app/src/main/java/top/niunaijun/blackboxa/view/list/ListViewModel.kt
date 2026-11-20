@@ -1,9 +1,9 @@
-package top.niunaijun.blackboxa.view.list
+package com.ccorea.view.list
 
 import androidx.lifecycle.MutableLiveData
-import top.niunaijun.blackboxa.bean.InstalledAppBean
-import top.niunaijun.blackboxa.data.AppsRepository
-import top.niunaijun.blackboxa.view.base.BaseViewModel
+import com.ccorea.bean.InstalledAppBean
+import com.ccorea.data.AppsRepository
+import com.ccorea.view.base.BaseViewModel
 
 /**
  *

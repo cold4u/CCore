@@ -1,10 +1,10 @@
-package top.niunaijun.blackboxa.view.main
+package com.ccorea.view.main
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import kotlinx.coroutines.launch
-import top.niunaijun.blackbox.BlackBoxCore
+import com.ccore.CCoreCore
 
 /**
  *
@@ -21,7 +21,7 @@ class ShortcutActivity:AppCompatActivity() {
         val userID = intent.getIntExtra("userId",0)
 
         lifecycleScope.launch {
-            BlackBoxCore.get().launchApk(pkg,userID)
+            CCoreCore.get().launchApk(pkg,userID)
             finish()
         }
     }

@@ -1,12 +1,12 @@
 // IBJobManagerService.aidl
-package top.niunaijun.blackbox.core.system.am;
+package com.ccore.core.system.am;
 
 import android.content.Intent;
 import android.content.ComponentName;
 import android.os.IBinder;
 import java.lang.String;
 import android.app.job.JobInfo;
-import top.niunaijun.blackbox.entity.JobRecord;
+import com.ccore.entity.JobRecord;
 
 // Declare any non-default types here with import statements
 

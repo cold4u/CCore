@@ -1,3 +1,3 @@
-package top.niunaijun.blackbox.entity.pm;
+package com.ccore.entity.pm;
 
 parcelable InstalledPackage;

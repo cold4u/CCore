@@ -1,4 +1,4 @@
-package top.niunaijun.blackboxa.view.apps
+package com.ccorea.view.apps
 
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView

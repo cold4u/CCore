@@ -1,5 +1,5 @@
 // IBPackageManagerService.aidl
-package top.niunaijun.blackbox.core.system.pm;
+package com.ccore.core.system.pm;
 
 // Declare any non-default types here with import statements
 import android.content.pm.ApplicationInfo;
@@ -11,9 +11,9 @@ import android.content.pm.ProviderInfo;
 import android.content.Intent;
 import android.content.ComponentName;
 import java.util.List;
-import top.niunaijun.blackbox.entity.pm.InstallResult;
-import top.niunaijun.blackbox.entity.pm.InstallOption;
-import top.niunaijun.blackbox.entity.pm.InstalledPackage;
+import com.ccore.entity.pm.InstallResult;
+import com.ccore.entity.pm.InstallOption;
+import com.ccore.entity.pm.InstalledPackage;
 
 
 interface IBPackageManagerService {

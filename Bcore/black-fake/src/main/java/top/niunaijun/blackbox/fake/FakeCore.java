@@ -1,4 +1,4 @@
-package top.niunaijun.blackbox.fake;
+package com.ccore.fake;
 
 import top.niunaijun.jnihook.ReflectCore;
 

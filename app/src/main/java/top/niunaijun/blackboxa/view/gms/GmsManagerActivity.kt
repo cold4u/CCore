@@ -1,4 +1,4 @@
-package top.niunaijun.blackboxa.view.gms
+package com.ccorea.view.gms
 
 import android.content.Context
 import android.content.Intent
@@ -8,13 +8,13 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import cbfg.rvadapter.RVAdapter
 import com.afollestad.materialdialogs.MaterialDialog
-import top.niunaijun.blackboxa.R
-import top.niunaijun.blackboxa.bean.GmsBean
-import top.niunaijun.blackboxa.databinding.ActivityGmsBinding
-import top.niunaijun.blackboxa.util.InjectionUtil
-import top.niunaijun.blackboxa.util.inflate
-import top.niunaijun.blackboxa.util.toast
-import top.niunaijun.blackboxa.view.base.LoadingActivity
+import com.ccorea.R
+import com.ccorea.bean.GmsBean
+import com.ccorea.databinding.ActivityGmsBinding
+import com.ccorea.util.InjectionUtil
+import com.ccorea.util.inflate
+import com.ccorea.util.toast
+import com.ccorea.view.base.LoadingActivity
 
 /**
  *

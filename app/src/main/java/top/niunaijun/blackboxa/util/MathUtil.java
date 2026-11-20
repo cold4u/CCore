@@ -1,4 +1,4 @@
-package top.niunaijun.blackboxa.util;
+package com.ccorea.util;
 
 import android.graphics.Point;
 import android.graphics.PointF;

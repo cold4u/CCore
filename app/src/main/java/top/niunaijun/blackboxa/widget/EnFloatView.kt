@@ -1,9 +1,9 @@
-package top.niunaijun.blackboxa.widget
+package com.ccorea.widget
 
 import android.content.Context
 import android.view.MotionEvent
 import com.imuxuan.floatingview.FloatingMagnetView
-import top.niunaijun.blackboxa.R
+import com.ccorea.R
 
 /**
  *

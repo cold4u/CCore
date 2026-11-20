@@ -1,4 +1,4 @@
-package top.niunaijun.blackboxa.data
+package com.ccorea.data
 
 import android.content.pm.ApplicationInfo
 import android.net.Uri
@@ -6,14 +6,14 @@ import android.util.Log
 import android.webkit.URLUtil
 import androidx.core.content.edit
 import androidx.lifecycle.MutableLiveData
-import top.niunaijun.blackbox.BlackBoxCore
-import top.niunaijun.blackbox.BlackBoxCore.getPackageManager
-import top.niunaijun.blackbox.utils.AbiUtils
-import top.niunaijun.blackboxa.R
-import top.niunaijun.blackboxa.app.AppManager
-import top.niunaijun.blackboxa.bean.AppInfo
-import top.niunaijun.blackboxa.bean.InstalledAppBean
-import top.niunaijun.blackboxa.util.getString
+import com.ccore.CCoreCore
+import com.ccore.CCoreCore.getPackageManager
+import com.ccore.utils.AbiUtils
+import com.ccorea.R
+import com.ccorea.app.AppManager
+import com.ccorea.bean.AppInfo
+import com.ccorea.bean.InstalledAppBean
+import com.ccorea.util.getString
 import java.io.File
 
 
@@ -41,7 +41,7 @@ class AppsRepository {
 
                 if (!AbiUtils.isSupport(file)) continue
 
-                val isXpModule = BlackBoxCore.get().isXposedModule(file)
+                val isXpModule = CCoreCore.get().isXposedModule(file)
 
                 val info = AppInfo(
                     installedApplication.loadLabel(getPackageManager()).toString(),
@@ -66,7 +66,7 @@ class AppsRepository {
     ) {
         loadingLiveData.postValue(true)
         synchronized(mInstalledList) {
-            val blackBoxCore = BlackBoxCore.get()
+            val blackBoxCore = CCoreCore.get()
             Log.d(TAG, mInstalledList.joinToString(","))
             val newInstalledList = mInstalledList.map {
                 InstalledAppBean(
@@ -92,7 +92,7 @@ class AppsRepository {
 
         loadingLiveData.postValue(true)
         synchronized(mInstalledList) {
-            val blackBoxCore = BlackBoxCore.get()
+            val blackBoxCore = CCoreCore.get()
             val moduleList = mInstalledList.filter {
                 it.isXpModule
             }.map {
@@ -116,7 +116,7 @@ class AppsRepository {
             AppManager.mRemarkSharedPreferences.getString("AppList$userId", "")
         val sortList = sortListData?.split(",")
 
-        val applicationList = BlackBoxCore.get().getInstalledApplications(0, userId)
+        val applicationList = CCoreCore.get().getInstalledApplications(0, userId)
 
         val appInfoList = mutableListOf<AppInfo>()
         applicationList.also {
@@ -142,7 +142,7 @@ class AppsRepository {
     }
 
     private fun isInstalledXpModule(packageName: String): Boolean {
-        BlackBoxCore.get().installedXPModules.forEach {
+        CCoreCore.get().installedXPModules.forEach {
             if (packageName == it.packageName) {
                 return@isInstalledXpModule true
             }
@@ -153,7 +153,7 @@ class AppsRepository {
 
 
     fun installApk(source: String, userId: Int, resultLiveData: MutableLiveData<String>) {
-        val blackBoxCore = BlackBoxCore.get()
+        val blackBoxCore = CCoreCore.get()
         val installResult = if (URLUtil.isValidUrl(source)) {
             val uri = Uri.parse(source)
             blackBoxCore.installPackageAsUser(uri, userId)
@@ -171,7 +171,7 @@ class AppsRepository {
     }
 
     fun unInstall(packageName: String, userID: Int, resultLiveData: MutableLiveData<String>) {
-        BlackBoxCore.get().uninstallPackageAsUser(packageName, userID)
+        CCoreCore.get().uninstallPackageAsUser(packageName, userID)
         updateAppSortList(userID, packageName, false)
         scanUser()
         resultLiveData.postValue(getString(R.string.uninstall_success))
@@ -179,13 +179,13 @@ class AppsRepository {
 
 
     fun launchApk(packageName: String, userId: Int, launchLiveData: MutableLiveData<Boolean>) {
-        val result = BlackBoxCore.get().launchApk(packageName, userId)
+        val result = CCoreCore.get().launchApk(packageName, userId)
         launchLiveData.postValue(result)
     }
 
 
     fun clearApkData(packageName: String, userID: Int, resultLiveData: MutableLiveData<String>) {
-        BlackBoxCore.get().clearPackage(packageName, userID)
+        CCoreCore.get().clearPackage(packageName, userID)
         resultLiveData.postValue(getString(R.string.clear_success))
     }
 
@@ -194,7 +194,7 @@ class AppsRepository {
      * 如果用户是空的，就删除用户，删除用户备注，删除应用排序列表
      */
     private fun scanUser() {
-        val blackBoxCore = BlackBoxCore.get()
+        val blackBoxCore = CCoreCore.get()
         val userList = blackBoxCore.users
 
         if (userList.isEmpty()) {

@@ -1,4 +1,4 @@
-package top.niunaijun.blackboxa.util
+package com.ccorea.util
 
 import android.content.Context
 import android.content.Intent
@@ -8,12 +8,12 @@ import androidx.core.graphics.drawable.IconCompat
 import androidx.core.graphics.drawable.toBitmap
 import com.afollestad.materialdialogs.MaterialDialog
 import com.afollestad.materialdialogs.input.input
-import top.niunaijun.blackboxa.R
-import top.niunaijun.blackboxa.app.App
-import top.niunaijun.blackboxa.app.AppManager
-import top.niunaijun.blackboxa.bean.AppInfo
-import top.niunaijun.blackboxa.util.ContextUtil.openAppSystemSettings
-import top.niunaijun.blackboxa.view.main.ShortcutActivity
+import com.ccorea.R
+import com.ccorea.app.App
+import com.ccorea.app.AppManager
+import com.ccorea.bean.AppInfo
+import com.ccorea.util.ContextUtil.openAppSystemSettings
+import com.ccorea.view.main.ShortcutActivity
 
 /**
  *

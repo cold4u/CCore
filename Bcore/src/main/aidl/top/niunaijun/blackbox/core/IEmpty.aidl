@@ -1,5 +1,5 @@
 // IBActivityThread.aidl
-package top.niunaijun.blackbox.core;
+package com.ccore.core;
 
 // Declare any non-default types here with import statements
 

@@ -1,4 +1,4 @@
-package top.niunaijun.blackbox.core.system.accounts;
+package com.ccore.core.system.accounts;
 
 import android.accounts.IAccountManagerResponse;
 import android.accounts.Account;

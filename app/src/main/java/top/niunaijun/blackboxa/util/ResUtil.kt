@@ -1,7 +1,7 @@
-package top.niunaijun.blackboxa.util
+package com.ccorea.util
 
 import androidx.annotation.StringRes
-import top.niunaijun.blackboxa.app.App
+import com.ccorea.app.App
 
 
 fun getString(@StringRes id:Int,vararg arg:String):String{

@@ -1,8 +1,8 @@
-package top.niunaijun.blackboxa.view.gms
+package com.ccorea.view.gms
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import top.niunaijun.blackboxa.data.GmsRepository
+import com.ccorea.data.GmsRepository
 
 /**
  *

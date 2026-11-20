@@ -1,3 +1,3 @@
-package top.niunaijun.blackbox.entity;
+package com.ccore.entity;
 
 parcelable UnbindRecord;

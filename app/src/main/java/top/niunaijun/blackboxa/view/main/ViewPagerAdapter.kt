@@ -1,9 +1,9 @@
-package top.niunaijun.blackboxa.view.main
+package com.ccorea.view.main
 
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.viewpager2.adapter.FragmentStateAdapter
-import top.niunaijun.blackboxa.view.apps.AppsFragment
+import com.ccorea.view.apps.AppsFragment
 
 /**
  *

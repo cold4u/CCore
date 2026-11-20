@@ -1,4 +1,4 @@
-package top.niunaijun.blackboxa.view.fake
+package com.ccorea.view.fake
 
 import android.app.Activity
 import android.content.Context
@@ -12,15 +12,15 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import cbfg.rvadapter.RVAdapter
 import com.afollestad.materialdialogs.MaterialDialog
 import com.ferfalk.simplesearchview.SimpleSearchView
-import top.niunaijun.blackbox.entity.location.BLocation
-import top.niunaijun.blackbox.fake.frameworks.BLocationManager
-import top.niunaijun.blackboxa.R
-import top.niunaijun.blackboxa.bean.FakeLocationBean
-import top.niunaijun.blackboxa.databinding.ActivityListBinding
-import top.niunaijun.blackboxa.util.InjectionUtil
-import top.niunaijun.blackboxa.util.inflate
-import top.niunaijun.blackboxa.util.toast
-import top.niunaijun.blackboxa.view.base.BaseActivity
+import com.ccore.entity.location.BLocation
+import com.ccore.fake.frameworks.BLocationManager
+import com.ccorea.R
+import com.ccorea.bean.FakeLocationBean
+import com.ccorea.databinding.ActivityListBinding
+import com.ccorea.util.InjectionUtil
+import com.ccorea.util.inflate
+import com.ccorea.util.toast
+import com.ccorea.view.base.BaseActivity
 
 /**
  *

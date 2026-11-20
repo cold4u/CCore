@@ -1,8 +1,8 @@
-package top.niunaijun.blackboxa.app
+package com.ccorea.app
 
 import android.content.Context
 import android.content.SharedPreferences
-import top.niunaijun.blackboxa.view.main.BlackBoxLoader
+import com.ccorea.view.main.BlackBoxLoader
 
 object AppManager {
     @JvmStatic
@@ -11,8 +11,8 @@ object AppManager {
     }
 
     @JvmStatic
-    val mBlackBoxCore by lazy {
-        mBlackBoxLoader.getBlackBoxCore()
+    val mCCoreCore by lazy {
+        mBlackBoxLoader.getCCoreCore()
     }
 
     @JvmStatic

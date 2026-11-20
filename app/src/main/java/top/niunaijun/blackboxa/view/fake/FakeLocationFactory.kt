@@ -1,8 +1,8 @@
-package top.niunaijun.blackboxa.view.fake
+package com.ccorea.view.fake
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import top.niunaijun.blackboxa.data.FakeLocationRepository
+import com.ccorea.data.FakeLocationRepository
 
 /**
  *

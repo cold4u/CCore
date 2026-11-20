@@ -1,16 +1,16 @@
-package top.niunaijun.blackboxa.view.setting
+package com.ccorea.view.setting
 
 import android.content.Intent
 import android.os.Bundle
 import androidx.preference.Preference
 import androidx.preference.PreferenceFragmentCompat
 import androidx.preference.SwitchPreferenceCompat
-import top.niunaijun.blackbox.BlackBoxCore
-import top.niunaijun.blackboxa.R
-import top.niunaijun.blackboxa.app.AppManager
-import top.niunaijun.blackboxa.util.toast
-import top.niunaijun.blackboxa.view.gms.GmsManagerActivity
-import top.niunaijun.blackboxa.view.xp.XpActivity
+import com.ccore.CCoreCore
+import com.ccorea.R
+import com.ccorea.app.AppManager
+import com.ccorea.util.toast
+import com.ccorea.view.gms.GmsManagerActivity
+import com.ccorea.view.xp.XpActivity
 
 /**
  *
@@ -28,10 +28,10 @@ class SettingFragment : PreferenceFragmentCompat() {
         setPreferencesFromResource(R.xml.setting, rootKey)
 
         xpEnable = findPreference("xp_enable")!!
-        xpEnable.isChecked = BlackBoxCore.get().isXPEnable
+        xpEnable.isChecked = CCoreCore.get().isXPEnable
 
         xpEnable.setOnPreferenceChangeListener { _, newValue ->
-            BlackBoxCore.get().isXPEnable = (newValue == true)
+            CCoreCore.get().isXPEnable = (newValue == true)
             true
         }
         //xp模块跳转
@@ -68,7 +68,7 @@ class SettingFragment : PreferenceFragmentCompat() {
     private fun initGms() {
         val gmsManagerPreference: Preference = (findPreference("gms_manager")!!)
 
-        if (BlackBoxCore.get().isSupportGms) {
+        if (CCoreCore.get().isSupportGms) {
 
             gmsManagerPreference.setOnPreferenceClickListener {
                 GmsManagerActivity.start(requireContext())

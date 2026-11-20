@@ -1,12 +1,12 @@
-package top.niunaijun.blackboxa.data
+package com.ccorea.data
 
 import android.content.pm.ApplicationInfo
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
-import top.niunaijun.blackbox.BlackBoxCore
-import top.niunaijun.blackbox.entity.location.BLocation
-import top.niunaijun.blackbox.fake.frameworks.BLocationManager
-import top.niunaijun.blackboxa.bean.FakeLocationBean
+import com.ccore.CCoreCore
+import com.ccore.entity.location.BLocation
+import com.ccore.fake.frameworks.BLocationManager
+import com.ccorea.bean.FakeLocationBean
 
 /**
  * getInstalledApplications and query fake location of each of them.
@@ -43,7 +43,7 @@ class FakeLocationRepository {
     ) {
         val installedList = mutableListOf<FakeLocationBean>()
         val installedApplications: List<ApplicationInfo> =
-            BlackBoxCore.get().getInstalledApplications(0, userID)
+            CCoreCore.get().getInstalledApplications(0, userID)
         // List<ApplicationInfo> -> List<FakeLocationBean>
         for (installedApplication in installedApplications) {
 //            val file = File(installedApplication.sourceDir)
@@ -52,12 +52,12 @@ class FakeLocationRepository {
 //
 //            if (!AbiUtils.isSupport(file)) continue
 //
-//            val isXpModule = BlackBoxCore.get().isXposedModule(file)
+//            val isXpModule = CCoreCore.get().isXposedModule(file)
 
             val info = FakeLocationBean(
                 userID,
-                installedApplication.loadLabel(BlackBoxCore.getPackageManager()).toString(),
-                installedApplication.loadIcon(BlackBoxCore.getPackageManager()),
+                installedApplication.loadLabel(CCoreCore.getPackageManager()).toString(),
+                installedApplication.loadIcon(CCoreCore.getPackageManager()),
                 installedApplication.packageName,
                 getPattern(userID, installedApplication.packageName),
                 getLocation(userID, installedApplication.packageName)

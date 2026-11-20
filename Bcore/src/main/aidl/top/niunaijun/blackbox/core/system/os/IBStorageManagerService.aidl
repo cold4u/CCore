@@ -1,5 +1,5 @@
 // IBStorageManagerService.aidl
-package top.niunaijun.blackbox.core.system.os;
+package com.ccore.core.system.os;
 
 import android.os.storage.StorageVolume;
 import java.lang.String;

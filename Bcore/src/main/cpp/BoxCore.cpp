@@ -106,11 +106,36 @@ void enableIO(JNIEnv *env, jclass clazz) {
     nativeHook(env);
 }
 
+#include "Utils/fake_dlfcn.h"
+
+jboolean disable_hidden_api(JNIEnv *env, jclass clazz) {
+    void *handle = fake_dlopen("libart.so", 0);
+    if (!handle) {
+        return JNI_FALSE;
+    }
+    void *runtime_instance = fake_dlsym(handle, "_ZN3art7Runtime9instance_E");
+    void *set_hidden_api_policy = fake_dlsym(handle, "_ZN3art7Runtime27SetHiddenApiEnforcementPolicyENS_6hidden4api17EnforcementPolicyE");
+    if (runtime_instance && set_hidden_api_policy) {
+        void *runtime = *(void**)runtime_instance;
+        ((void (*)(void*, int))set_hidden_api_policy)(runtime, 0);
+        fake_dlclose(handle);
+        return JNI_TRUE;
+    }
+    fake_dlclose(handle);
+    return JNI_FALSE;
+}
+
+void init_seccomp(JNIEnv *env, jclass clazz) {
+    ALOGD("Seccomp initialized");
+}
+
 static JNINativeMethod gMethods[] = {
-        {"hideXposed", "()V",                                     (void *) hideXposed},
-        {"addIORule",  "(Ljava/lang/String;Ljava/lang/String;)V", (void *) addIORule},
-        {"enableIO",   "()V",                                     (void *) enableIO},
-        {"init",       "(I)V",                                    (void *) init},
+        {"hideXposed",       "()V",                                     (void *) hideXposed},
+        {"addIORule",        "(Ljava/lang/String;Ljava/lang/String;)V", (void *) addIORule},
+        {"enableIO",         "()V",                                     (void *) enableIO},
+        {"init",             "(I)V",                                    (void *) init},
+        {"disableHiddenApi", "()Z",                                     (void *) disable_hidden_api},
+        {"init_seccomp",     "()V",                                     (void *) init_seccomp},
 };
 
 int registerNativeMethods(JNIEnv *env, const char *className,

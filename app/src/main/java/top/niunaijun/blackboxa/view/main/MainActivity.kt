@@ -1,4 +1,4 @@
-package top.niunaijun.blackboxa.view.main
+package com.ccorea.view.main
 
 import android.content.Context
 import android.content.Intent
@@ -11,18 +11,18 @@ import androidx.core.content.edit
 import androidx.viewpager2.widget.ViewPager2
 import com.afollestad.materialdialogs.MaterialDialog
 import com.afollestad.materialdialogs.input.input
-import top.niunaijun.blackbox.BlackBoxCore
-import top.niunaijun.blackboxa.R
-import top.niunaijun.blackboxa.app.App
-import top.niunaijun.blackboxa.app.AppManager
-import top.niunaijun.blackboxa.databinding.ActivityMainBinding
-import top.niunaijun.blackboxa.util.Resolution
-import top.niunaijun.blackboxa.util.inflate
-import top.niunaijun.blackboxa.view.apps.AppsFragment
-import top.niunaijun.blackboxa.view.base.LoadingActivity
-import top.niunaijun.blackboxa.view.fake.FakeManagerActivity
-import top.niunaijun.blackboxa.view.list.ListActivity
-import top.niunaijun.blackboxa.view.setting.SettingActivity
+import com.ccore.CCoreCore
+import com.ccorea.R
+import com.ccorea.app.App
+import com.ccorea.app.AppManager
+import com.ccorea.databinding.ActivityMainBinding
+import com.ccorea.util.Resolution
+import com.ccorea.util.inflate
+import com.ccorea.view.apps.AppsFragment
+import com.ccorea.view.base.LoadingActivity
+import com.ccorea.view.fake.FakeManagerActivity
+import com.ccorea.view.list.ListActivity
+import com.ccorea.view.setting.SettingActivity
 
 
 class MainActivity : LoadingActivity() {
@@ -67,7 +67,7 @@ class MainActivity : LoadingActivity() {
 
     private fun initViewPager() {
 
-        val userList = BlackBoxCore.get().users
+        val userList = CCoreCore.get().users
         userList.forEach {
             fragmentList.add(AppsFragment.newInstance(it.id))
         }
@@ -113,7 +113,7 @@ class MainActivity : LoadingActivity() {
     }
 
     fun scanUser() {
-        val userList = BlackBoxCore.get().users
+        val userList = CCoreCore.get().users
 
         if (fragmentList.size == userList.size) {
             fragmentList.add(AppsFragment.newInstance(fragmentList.size))

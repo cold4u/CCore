@@ -1,7 +1,7 @@
-package top.niunaijun.blackboxa.bean
+package com.ccorea.bean
 
 import android.graphics.drawable.Drawable
-import top.niunaijun.blackbox.entity.location.BLocation
+import com.ccore.entity.location.BLocation
 
 data class FakeLocationBean(
     val userID: Int,

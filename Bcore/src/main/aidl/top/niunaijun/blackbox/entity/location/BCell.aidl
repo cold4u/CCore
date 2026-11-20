@@ -1,3 +1,3 @@
-package top.niunaijun.blackbox.entity.location;
+package com.ccore.entity.location;
 
 parcelable BCell;

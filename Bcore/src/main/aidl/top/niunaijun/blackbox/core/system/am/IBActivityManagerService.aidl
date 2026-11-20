@@ -1,5 +1,5 @@
 // IBActivityManagerService.aidl
-package top.niunaijun.blackbox.core.system.am;
+package com.ccore.core.system.am;
 
 import android.content.Intent;
 import android.content.ComponentName;
@@ -8,12 +8,12 @@ import android.content.pm.ProviderInfo;
 import android.os.IBinder;
 import java.lang.String;
 import android.app.IServiceConnection;
-import top.niunaijun.blackbox.entity.AppConfig;
-import top.niunaijun.blackbox.entity.UnbindRecord;
+import com.ccore.entity.AppConfig;
+import com.ccore.entity.UnbindRecord;
 import android.os.Bundle;
-import top.niunaijun.blackbox.entity.am.RunningAppProcessInfo;
-import top.niunaijun.blackbox.entity.am.PendingResultData;
-import top.niunaijun.blackbox.entity.am.RunningServiceInfo;
+import com.ccore.entity.am.RunningAppProcessInfo;
+import com.ccore.entity.am.PendingResultData;
+import com.ccore.entity.am.RunningServiceInfo;
 
 // Declare any non-default types here with import statements
 

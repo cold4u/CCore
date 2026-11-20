@@ -1,4 +1,4 @@
-package top.niunaijun.blackboxa.app
+package com.ccorea.app
 
 import android.annotation.SuppressLint
 import android.app.Application

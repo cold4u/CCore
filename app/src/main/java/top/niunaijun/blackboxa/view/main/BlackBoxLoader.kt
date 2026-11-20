@@ -1,16 +1,16 @@
-package top.niunaijun.blackboxa.view.main
+package com.ccorea.view.main
 
 import android.app.Application
 import android.content.Context
 import android.util.Log
-import top.niunaijun.blackbox.BlackBoxCore
-import top.niunaijun.blackbox.app.BActivityThread
-import top.niunaijun.blackbox.app.configuration.AppLifecycleCallback
-import top.niunaijun.blackbox.app.configuration.ClientConfiguration
-import top.niunaijun.blackboxa.app.App
-import top.niunaijun.blackboxa.app.rocker.RockerManager
-import top.niunaijun.blackboxa.biz.cache.AppSharedPreferenceDelegate
-import top.niunaijun.blackboxa.util.toast
+import com.ccore.CCoreCore
+import com.ccore.app.BActivityThread
+import com.ccore.app.configuration.AppLifecycleCallback
+import com.ccore.app.configuration.ClientConfiguration
+import com.ccorea.app.App
+import com.ccorea.app.rocker.RockerManager
+import com.ccorea.biz.cache.AppSharedPreferenceDelegate
+import com.ccorea.util.toast
 import java.io.File
 
 /**
@@ -60,12 +60,12 @@ class BlackBoxLoader {
         this.mShowShortcutPermissionDialog = show
     }
 
-    fun getBlackBoxCore(): BlackBoxCore {
-        return BlackBoxCore.get()
+    fun getCCoreCore(): CCoreCore {
+        return CCoreCore.get()
     }
 
     fun addLifecycleCallback() {
-        BlackBoxCore.get().addAppLifecycleCallback(object : AppLifecycleCallback() {
+        CCoreCore.get().addAppLifecycleCallback(object : AppLifecycleCallback() {
             override fun beforeCreateApplication(
                 packageName: String?,
                 processName: String?,
@@ -98,7 +98,7 @@ class BlackBoxLoader {
     }
 
     fun attachBaseContext(context: Context) {
-        BlackBoxCore.get().doAttachBaseContext(context, object : ClientConfiguration() {
+        CCoreCore.get().doAttachBaseContext(context, object : ClientConfiguration() {
             override fun getHostPackageName(): String {
                 return context.packageName
             }
@@ -124,7 +124,7 @@ class BlackBoxLoader {
     }
 
     fun doOnCreate(context: Context) {
-        BlackBoxCore.get().doCreate()
+        CCoreCore.get().doCreate()
 
     }
 

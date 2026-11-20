@@ -1,9 +1,9 @@
-package top.niunaijun.blackboxa.util
+package com.ccorea.util
 
 import android.content.Context
 import android.widget.Toast
 import androidx.annotation.StringRes
-import top.niunaijun.blackboxa.app.App
+import com.ccorea.app.App
 
 /**
  *

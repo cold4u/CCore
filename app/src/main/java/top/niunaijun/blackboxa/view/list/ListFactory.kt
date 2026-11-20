@@ -1,8 +1,8 @@
-package top.niunaijun.blackboxa.view.list
+package com.ccorea.view.list
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import top.niunaijun.blackboxa.data.AppsRepository
+import com.ccorea.data.AppsRepository
 
 /**
  *

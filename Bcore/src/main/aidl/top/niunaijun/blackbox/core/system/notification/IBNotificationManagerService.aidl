@@ -1,5 +1,5 @@
 // IBNotificationManagerService.aidl
-package top.niunaijun.blackbox.core.system.notification;
+package com.ccore.core.system.notification;
 
 // Declare any non-default types here with import statements
 import android.app.Notification;
