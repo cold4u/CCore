@@ -243,13 +243,13 @@ void JniHook::InitJniHook(JNIEnv *env, int api_level) {
                                                                         true));
     void *nativeOffsetField2 = GetFieldMethod(env, env->ToReflectedField(clazz, nativeOffsetField2Id,
                                                                          true));
-    if (nativeOffsetField && nativeOffsetField2) {
+    if ((uintptr_t) nativeOffsetField > 0x10000 && (uintptr_t) nativeOffsetField2 > 0x10000) {
         HookEnv.art_field_size = (size_t) nativeOffsetField2 - (size_t) nativeOffsetField;
     }
 
     void *nativeOffset = GetArtMethod(env, clazz, nativeOffsetId);
     void *nativeOffset2 = GetArtMethod(env, clazz, nativeOffset2Id);
-    if (!nativeOffset || !nativeOffset2) {
+    if (!nativeOffset || !nativeOffset2 || (uintptr_t) nativeOffset < 0x10000 || (uintptr_t) nativeOffset2 < 0x10000) {
         ALOGE("Failed to resolve ArtMethod for native offset");
         return;
     }
@@ -289,12 +289,14 @@ void JniHook::InitJniHook(JNIEnv *env, int api_level) {
     if (api_level >= __ANDROID_API_Q__) {
         flags = flags | kAccPublicApi;
     }
-    char *fieldStart = reinterpret_cast<char *>(nativeOffsetField);
-    for (int i = 1; i < HookEnv.art_field_size; ++i) {
-        auto value = *(int32_t *) (fieldStart + i * sizeof(int32_t));
-        if (value == flags) {
-            HookEnv.art_field_flags_offset = i * sizeof(int32_t);
-            break;
+    if ((uintptr_t) nativeOffsetField > 0x10000 && HookEnv.art_field_size > 0 && HookEnv.art_field_size < 512) {
+        char *fieldStart = reinterpret_cast<char *>(nativeOffsetField);
+        for (int i = 1; i < HookEnv.art_field_size; ++i) {
+            auto value = *(int32_t *) (fieldStart + i * sizeof(int32_t));
+            if (value == flags) {
+                HookEnv.art_field_flags_offset = i * sizeof(int32_t);
+                break;
+            }
         }
     }
 
