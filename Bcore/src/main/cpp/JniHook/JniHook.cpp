@@ -80,22 +80,47 @@ inline static bool ClearFastNativeFlag(char *art_method) {
 static void *GetArtMethod(JNIEnv *env, jclass clazz, jmethodID methodId) {
     if (HookEnv.api_level >= __ANDROID_API_Q__) {
         jclass executable = env->FindClass("java/lang/reflect/Executable");
-        jfieldID artId = env->GetFieldID(executable, "artMethod", "J");
-        jobject method = env->ToReflectedMethod(clazz, methodId, true);
-        return reinterpret_cast<void *>(env->GetLongField(method, artId));
+        if (executable) {
+            jfieldID artId = env->GetFieldID(executable, "artMethod", "J");
+            if (artId) {
+                jobject method = env->ToReflectedMethod(clazz, methodId, true);
+                if (method) {
+                    return reinterpret_cast<void *>(env->GetLongField(method, artId));
+                }
+            }
+            if (env->ExceptionCheck()) {
+                env->ExceptionClear();
+            }
+        }
+        return methodId;
     } else {
         return methodId;
     }
 }
 
 static void *GetFieldMethod(JNIEnv *env, jobject field) {
+    if (!field) return nullptr;
     if (HookEnv.api_level >= __ANDROID_API_Q__) {
         jclass fieldClass = env->FindClass("java/lang/reflect/Field");
-        jmethodID getArtField = env->GetMethodID(fieldClass, "getArtField", "()J");
-        return reinterpret_cast<void *>(env->CallLongMethod(field, getArtField));
-    } else {
-        return env->FromReflectedField(field);
+        if (fieldClass) {
+            jfieldID artFieldId = env->GetFieldID(fieldClass, "artField", "J");
+            if (artFieldId) {
+                return reinterpret_cast<void *>(env->GetLongField(field, artFieldId));
+            }
+            if (env->ExceptionCheck()) {
+                env->ExceptionClear();
+            }
+            jmethodID getArtField = env->GetMethodID(fieldClass, "getArtField", "()J");
+            if (getArtField) {
+                return reinterpret_cast<void *>(env->CallLongMethod(field, getArtField));
+            }
+            if (env->ExceptionCheck()) {
+                env->ExceptionClear();
+            }
+        }
     }
+    jfieldID fId = env->FromReflectedField(field);
+    return reinterpret_cast<void *>(fId);
 }
 
 bool CheckFlags(void *artMethod) {
@@ -172,6 +197,7 @@ __attribute__((section (".mytext")))  JNICALL void set_method_accessible
         (JNIEnv *env, jclass obj, jclass clazz, jobject method) {
     jmethodID methodId = env->FromReflectedMethod(method);
     char *art_method = static_cast<char *>(GetArtMethod(env, clazz, methodId));
+    if (!art_method) return;
     AddAccessFlag(art_method, kAccPublic);
     if (HookEnv.api_level >= __ANDROID_API_Q__) {
         AddAccessFlag(art_method, kAccPublicApi);
@@ -181,6 +207,7 @@ __attribute__((section (".mytext")))  JNICALL void set_method_accessible
 __attribute__((section (".mytext")))  JNICALL void set_field_accessible
         (JNIEnv *env, jclass obj, jclass clazz, jobject field) {
     char *artField = static_cast<char *>(GetFieldMethod(env, field));
+    if (!artField) return;
     AddAccessFlag(artField, kAccPublic);
     if (HookEnv.api_level >= __ANDROID_API_Q__) {
         AddAccessFlag(artField, kAccPublicApi);
@@ -216,10 +243,16 @@ void JniHook::InitJniHook(JNIEnv *env, int api_level) {
                                                                         true));
     void *nativeOffsetField2 = GetFieldMethod(env, env->ToReflectedField(clazz, nativeOffsetField2Id,
                                                                          true));
-    HookEnv.art_field_size = (size_t) nativeOffsetField2 - (size_t) nativeOffsetField;
+    if (nativeOffsetField && nativeOffsetField2) {
+        HookEnv.art_field_size = (size_t) nativeOffsetField2 - (size_t) nativeOffsetField;
+    }
 
     void *nativeOffset = GetArtMethod(env, clazz, nativeOffsetId);
     void *nativeOffset2 = GetArtMethod(env, clazz, nativeOffset2Id);
+    if (!nativeOffset || !nativeOffset2) {
+        ALOGE("Failed to resolve ArtMethod for native offset");
+        return;
+    }
     HookEnv.art_method_size = (size_t) nativeOffset2 - (size_t) nativeOffset;
 
     // calc native offset
