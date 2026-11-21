@@ -62,9 +62,9 @@ public class IStorageManagerProxy extends BinderInvocationStub {
                 return volumeList;
             }
             try {
-                int uid = (int) args[0];
+                int uid = args[0] instanceof Number ? ((Number) args[0]).intValue() : 0;
                 String packageName = (String) args[1];
-                int flags = (int) args[2];
+                int flags = args[2] instanceof Number ? ((Number) args[2]).intValue() : 0;
                 StorageVolume[] volumeList = CCoreCore.getBStorageManager().getVolumeList(uid, packageName, flags, BActivityThread.getUserId());
                 if (volumeList == null) {
                     return method.invoke(who, args);
