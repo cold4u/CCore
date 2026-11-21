@@ -51,6 +51,13 @@ public class IAppOpsManagerProxy extends BinderInvocationStub {
     public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
         MethodParameterUtils.replaceFirstAppPkg(args);
         MethodParameterUtils.replaceLastUid(args);
+        if (args != null) {
+            for (Object arg : args) {
+                if (arg != null && "android.content.AttributionSource".equals(arg.getClass().getName())) {
+                    com.ccore.utils.compat.ContextCompat.fixAttributionSourceState(arg, CCoreCore.getHostUid());
+                }
+            }
+        }
         return super.invoke(proxy, method, args);
     }
 
