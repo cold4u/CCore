@@ -78,21 +78,36 @@ public class HCallbackProxy implements IInjectHook, Handler.Callback {
         if (!mBeing.getAndSet(true)) {
             try {
                 if (BuildCompat.isPie()) {
-                    if (msg.what == BRActivityThreadH.get().EXECUTE_TRANSACTION()) {
+                    Integer executeTransaction = null;
+                    try {
+                        executeTransaction = BRActivityThreadH.get().EXECUTE_TRANSACTION();
+                    } catch (Throwable ignored) {}
+                    int targetWhat = executeTransaction != null ? executeTransaction : 159;
+                    if (msg.what == targetWhat) {
                         if (handleLaunchActivity(msg.obj)) {
                             getH().sendMessageAtFrontOfQueue(Message.obtain(msg));
                             return true;
                         }
                     }
                 } else {
-                    if (msg.what == BRActivityThreadH.get().LAUNCH_ACTIVITY()) {
+                    Integer launchActivity = null;
+                    try {
+                        launchActivity = BRActivityThreadH.get().LAUNCH_ACTIVITY();
+                    } catch (Throwable ignored) {}
+                    int targetWhat = launchActivity != null ? launchActivity : 100;
+                    if (msg.what == targetWhat) {
                         if (handleLaunchActivity(msg.obj)) {
                             getH().sendMessageAtFrontOfQueue(Message.obtain(msg));
                             return true;
                         }
                     }
                 }
-                if (msg.what == BRActivityThreadH.get().CREATE_SERVICE()) {
+                Integer createService = null;
+                try {
+                    createService = BRActivityThreadH.get().CREATE_SERVICE();
+                } catch (Throwable ignored) {}
+                int createServiceWhat = createService != null ? createService : 114;
+                if (msg.what == createServiceWhat) {
                     return handleCreateService(msg.obj);
                 }
                 if (mOtherCallback != null) {

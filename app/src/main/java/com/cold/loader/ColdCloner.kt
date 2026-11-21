@@ -12,7 +12,11 @@ object ColdCloner {
     private const val TAG = "ColdCloner"
 
     fun isInstalledInSandbox(packageName: String, userId: Int = 0): Boolean {
-        return CCoreCore.get().isInstalled(packageName, userId)
+        return try {
+            CCoreCore.get().isInstalled(packageName, userId)
+        } catch (t: Throwable) {
+            false
+        }
     }
 
     fun prepareAndInstall(context: Context, packageName: String, userId: Int = 0): Boolean {

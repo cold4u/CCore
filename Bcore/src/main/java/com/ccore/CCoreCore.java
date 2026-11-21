@@ -356,7 +356,9 @@ public class CCoreCore extends ClientConfiguration {
         Bundle vm = ProviderCall.callSafely(ProxyManifest.getBindProvider(), "VM", null, bundle);
         binder = BundleCompat.getBinder(vm, "_B_|_server_");
         Slog.d(TAG, "getService: " + name + ", " + binder);
-        mServices.put(name, binder);
+        if (binder != null) {
+            mServices.put(name, binder);
+        }
         return binder;
     }
 
