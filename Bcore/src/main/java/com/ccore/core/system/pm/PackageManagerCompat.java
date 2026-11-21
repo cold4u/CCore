@@ -202,9 +202,14 @@ public class PackageManagerCompat {
         if (BuildCompat.isPie()) {
             if ((flags & PackageManager.GET_SIGNING_CERTIFICATES) != 0) {
                 if (base == null) {
-                    PackageParser.SigningDetails signingDetails = PackageParser.SigningDetails.UNKNOWN;
-                    BRPackageParserSigningDetails.get(signingDetails)._set_signatures(p.mSigningDetails.signatures);
-                    pi.signingInfo = BRSigningInfo.get()._new(signingDetails);
+                    try {
+                        PackageParser.SigningDetails signingDetails = PackageParser.SigningDetails.UNKNOWN;
+                        if (p.mSigningDetails != null && p.mSigningDetails.signatures != null) {
+                            BRPackageParserSigningDetails.get(signingDetails)._set_signatures(p.mSigningDetails.signatures);
+                            pi.signingInfo = BRSigningInfo.get()._new(signingDetails);
+                        }
+                    } catch (Throwable ignored) {
+                    }
                 } else {
                     pi.signingInfo = base.signingInfo;
                 }

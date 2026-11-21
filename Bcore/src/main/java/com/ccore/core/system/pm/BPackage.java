@@ -124,9 +124,13 @@ public class BPackage implements Parcelable {
         }
 
         this.requestedPermissions = aPackage.requestedPermissions;
-        if (BuildCompat.isPie()) {
-            this.mSigningDetails = new SigningDetails(aPackage.mSigningDetails);
-            this.mSignatures = this.mSigningDetails.signatures;
+        if (BuildCompat.isPie() && aPackage.mSigningDetails != null) {
+            try {
+                this.mSigningDetails = new SigningDetails(aPackage.mSigningDetails);
+                this.mSignatures = this.mSigningDetails.signatures;
+            } catch (Throwable t) {
+                this.mSignatures = aPackage.mSignatures;
+            }
         } else {
             this.mSignatures = aPackage.mSignatures;
         }
@@ -451,11 +455,22 @@ public class BPackage implements Parcelable {
         }
 
         public SigningDetails(PackageParser.SigningDetails signingDetails) {
-            if (signingDetails.pastSigningCertificates == null) {
-                this.signatures = signingDetails.signatures;
-            } else {
-                this.signatures = signingDetails.pastSigningCertificates;
+            Signature[] sigs = null;
+            if (signingDetails != null) {
+                try {
+                    java.lang.reflect.Field pastField = signingDetails.getClass().getDeclaredField("pastSigningCertificates");
+                    pastField.setAccessible(true);
+                    sigs = (Signature[]) pastField.get(signingDetails);
+                } catch (Throwable ignored) {
+                }
+                if (sigs == null) {
+                    try {
+                        sigs = signingDetails.signatures;
+                    } catch (Throwable ignored) {
+                    }
+                }
             }
+            this.signatures = sigs;
         }
 
         protected SigningDetails(Parcel in) {
