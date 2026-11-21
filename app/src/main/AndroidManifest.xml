@@ -36,11 +36,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
-        <activity
-            android:name="com.ccorea.proxy.ProxyActivity$P0"
-            android:exported="false"
-            android:process=":p0" />
     </application>
 
 </manifest>

@@ -244,15 +244,22 @@ class ColdMainActivity : AppCompatActivity() {
             return false
         }
 
-        // Android 11+ All Files Access
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R && !Environment.isExternalStorageManager()) {
-            val intent = Intent(Settings.ACTION_MANAGE_APP_ALL_FILES_ACCESS_PERMISSION, Uri.parse("package:$packageName"))
-            startActivity(intent)
-            return false
+        // Android 11+ All Files Access (API 30+)
+        if (Build.VERSION.SDK_INT >= 30) {
+            try {
+                val isManager = Environment::class.java.getMethod("isExternalStorageManager").invoke(null) as Boolean
+                if (!isManager) {
+                    val intent = Intent("android.settings.MANAGE_APP_ALL_FILES_ACCESS_PERMISSION", Uri.parse("package:$packageName"))
+                    startActivity(intent)
+                    return false
+                }
+            } catch (t: Throwable) {
+                // Ignore fallback
+            }
         }
 
         // Legacy storage permissions
-        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.R) {
+        if (Build.VERSION.SDK_INT < 30) {
             val perms = arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE)
             val missing = perms.filter { ContextCompat.checkSelfPermission(this, it) != PackageManager.PERMISSION_GRANTED }
             if (missing.isNotEmpty()) {
