@@ -37,7 +37,7 @@ public class ProxyActivity extends Activity {
         ProxyActivityRecord record = ProxyActivityRecord.create(getIntent());
         if (record.mTarget != null) {
             record.mTarget.setExtrasClassLoader(BActivityThread.getApplication().getClassLoader());
-            startActivity(record.mTarget);
+            com.ccore.CCoreCore.getBActivityManager().startActivity(record.mTarget, record.mUserId);
             return;
         }
     }

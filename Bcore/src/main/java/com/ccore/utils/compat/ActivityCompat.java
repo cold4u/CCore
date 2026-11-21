@@ -35,18 +35,20 @@ public class ActivityCompat {
 
         Context baseContext = activity.getBaseContext();
         try {
-            TypedArray typedArray = activity.obtainStyledAttributes((BRRstyleable.get().Window()));
-            if (typedArray != null) {
-                boolean showWallpaper = typedArray.getBoolean(BRRstyleable.get().Window_windowShowWallpaper(),
-                        false);
-                if (showWallpaper) {
-                    activity.getWindow().setBackgroundDrawable(WallpaperManager.getInstance(activity).getDrawable());
+            if (BRRstyleable.get() != null && BRRstyleable.get()._check_Window() != null && BRRstyleable.get().Window() != null) {
+                TypedArray typedArray = activity.obtainStyledAttributes((BRRstyleable.get().Window()));
+                if (typedArray != null) {
+                    boolean showWallpaper = typedArray.getBoolean(BRRstyleable.get().Window_windowShowWallpaper(),
+                            false);
+                    if (showWallpaper) {
+                        activity.getWindow().setBackgroundDrawable(WallpaperManager.getInstance(activity).getDrawable());
+                    }
+                    boolean fullscreen = typedArray.getBoolean(BRRstyleable.get().Window_windowFullscreen(), false);
+                    if (fullscreen) {
+                        activity.getWindow().addFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
+                    }
+                    typedArray.recycle();
                 }
-                boolean fullscreen = typedArray.getBoolean(BRRstyleable.get().Window_windowFullscreen(), false);
-                if (fullscreen) {
-                    activity.getWindow().addFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
-                }
-                typedArray.recycle();
             }
         } catch (Throwable e) {
             e.printStackTrace();

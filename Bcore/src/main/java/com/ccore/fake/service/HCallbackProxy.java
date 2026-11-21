@@ -188,22 +188,40 @@ public class HCallbackProxy implements IInjectHook, Handler.Callback {
             int taskId = BRIActivityManager.get(BRActivityManagerNative.get().getDefault()).getTaskForActivity(token, false);
             CCoreCore.getBActivityManager().onActivityCreated(taskId, token, stubRecord.mActivityRecord);
 
-            if (BuildCompat.isS()) {
-                Object record = BRActivityThread.get(CCoreCore.mainThread()).getLaunchingActivity(token);
-                ActivityThreadActivityClientRecordContext clientRecordContext = BRActivityThreadActivityClientRecord.get(record);
-                clientRecordContext._set_intent(stubRecord.mTarget);
-                clientRecordContext._set_activityInfo(activityInfo);
-                clientRecordContext._set_packageInfo(BActivityThread.currentActivityThread().getPackageInfo());
-
-                checkActivityClient();
-            } else if (BuildCompat.isPie()) {
-                LaunchActivityItemContext launchActivityItemContext = BRLaunchActivityItem.get(r);
-                launchActivityItemContext._set_mIntent(stubRecord.mTarget);
-                launchActivityItemContext._set_mInfo(activityInfo);
+            if (BuildCompat.isPie()) {
+                try {
+                    LaunchActivityItemContext launchActivityItemContext = BRLaunchActivityItem.get(r);
+                    launchActivityItemContext._set_mIntent(stubRecord.mTarget);
+                    launchActivityItemContext._set_mInfo(activityInfo);
+                } catch (Throwable t) {
+                    t.printStackTrace();
+                }
             } else {
                 ActivityThreadActivityClientRecordContext clientRecordContext = BRActivityThreadActivityClientRecord.get(r);
                 clientRecordContext._set_intent(stubRecord.mTarget);
                 clientRecordContext._set_activityInfo(activityInfo);
+            }
+
+            if (BuildCompat.isS()) {
+                try {
+                    Object record = null;
+                    try {
+                        record = BRActivityThread.get(CCoreCore.mainThread()).getActivityClient(token);
+                    } catch (Throwable ignored) {}
+                    if (record == null) {
+                        try {
+                            record = BRActivityThread.get(CCoreCore.mainThread()).getLaunchingActivity(token);
+                        } catch (Throwable ignored) {}
+                    }
+                    if (record != null) {
+                        ActivityThreadActivityClientRecordContext clientRecordContext = BRActivityThreadActivityClientRecord.get(record);
+                        clientRecordContext._set_intent(stubRecord.mTarget);
+                        clientRecordContext._set_activityInfo(activityInfo);
+                        clientRecordContext._set_packageInfo(BActivityThread.currentActivityThread().getPackageInfo());
+                    }
+                } catch (Throwable ignored) {}
+
+                checkActivityClient();
             }
         }
         return false;
