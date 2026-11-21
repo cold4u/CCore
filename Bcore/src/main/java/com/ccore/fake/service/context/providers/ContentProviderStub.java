@@ -9,7 +9,7 @@ import black.android.content.BRAttributionSource;
 import com.ccore.CCoreCore;
 import com.ccore.app.BActivityThread;
 import com.ccore.fake.hook.ClassInvocationStub;
-import com.ccore.utils.VLog;
+import android.util.Log;
 import com.ccore.utils.compat.ContextCompat;
 
 /**
@@ -70,7 +70,7 @@ public class ContentProviderStub extends ClassInvocationStub implements BContent
         } catch (Throwable e) {
             Throwable cause = e.getCause() != null ? e.getCause() : e;
             if (cause instanceof SecurityException) {
-                VLog.e(TAG, "Suppressed SecurityException in ContentProvider." + method.getName() + ": " + cause.getMessage());
+                Log.e(TAG, "Suppressed SecurityException in ContentProvider." + method.getName() + ": " + cause.getMessage());
                 if (Bundle.class.equals(method.getReturnType())) {
                     return new Bundle();
                 }

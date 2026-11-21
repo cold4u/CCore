@@ -9,7 +9,7 @@ import black.android.content.BRAttributionSource;
 import com.ccore.CCoreCore;
 import com.ccore.app.BActivityThread;
 import com.ccore.fake.hook.ClassInvocationStub;
-import com.ccore.utils.VLog;
+import android.util.Log;
 import com.ccore.utils.compat.ContextCompat;
 
 /**
@@ -74,7 +74,7 @@ public class SettingsProviderStub extends ClassInvocationStub implements BConten
         } catch (Throwable t) {
             Throwable cause = t.getCause() != null ? t.getCause() : t;
             if (cause instanceof SecurityException) {
-                VLog.e(TAG, "Suppressed SecurityException in SettingsProvider." + method.getName() + ": " + cause.getMessage());
+                Log.e(TAG, "Suppressed SecurityException in SettingsProvider." + method.getName() + ": " + cause.getMessage());
                 if (Bundle.class.equals(method.getReturnType())) {
                     return new Bundle();
                 }
