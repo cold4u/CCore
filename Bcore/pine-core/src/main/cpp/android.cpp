@@ -6,6 +6,7 @@
 #include <string>
 #include <dlfcn.h>
 #include <mutex>
+#include <memory>
 #include "android.h"
 #include "utils/well_known_classes.h"
 #include "art/art_method.h"
