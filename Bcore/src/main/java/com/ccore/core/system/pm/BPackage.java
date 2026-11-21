@@ -144,10 +144,42 @@ public class BPackage implements Parcelable {
         this.mVersionCode = aPackage.mVersionCode;
         this.applicationInfo = aPackage.applicationInfo;
         this.mVersionName = aPackage.mVersionName;
-        this.baseCodePath = aPackage.baseCodePath;
-        this.mSharedUserLabel = aPackage.mSharedUserLabel;
-        this.configPreferences = aPackage.configPreferences;
-        this.reqFeatures = aPackage.reqFeatures;
+        String codePath = null;
+        if (aPackage.applicationInfo != null && aPackage.applicationInfo.sourceDir != null) {
+            codePath = aPackage.applicationInfo.sourceDir;
+        }
+        if (codePath == null && aPackage.applicationInfo != null) {
+            codePath = aPackage.applicationInfo.publicSourceDir;
+        }
+        if (codePath == null) {
+            try {
+                java.lang.reflect.Field field = aPackage.getClass().getDeclaredField("baseCodePath");
+                field.setAccessible(true);
+                codePath = (String) field.get(aPackage);
+            } catch (Throwable ignored) {
+            }
+        }
+        if (codePath == null) {
+            try {
+                java.lang.reflect.Field field = aPackage.getClass().getDeclaredField("codePath");
+                field.setAccessible(true);
+                codePath = (String) field.get(aPackage);
+            } catch (Throwable ignored) {
+            }
+        }
+        this.baseCodePath = codePath;
+        try {
+            this.mSharedUserLabel = aPackage.mSharedUserLabel;
+        } catch (Throwable ignored) {
+        }
+        try {
+            this.configPreferences = aPackage.configPreferences;
+        } catch (Throwable ignored) {
+        }
+        try {
+            this.reqFeatures = aPackage.reqFeatures;
+        } catch (Throwable ignored) {
+        }
     }
 
     protected BPackage(Parcel in) {
