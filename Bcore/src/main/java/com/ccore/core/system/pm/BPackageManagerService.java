@@ -734,7 +734,6 @@ public class BPackageManagerService extends IBPackageManagerService.Stub impleme
             }
             Slog.d(TAG, "install finish: " + (System.currentTimeMillis() - l) + "ms");
         }
-        return result;
     }
 
     private PackageParser.Package parserApk(String file) {
