@@ -30,6 +30,7 @@ class ColdApp : Application() {
                 override fun isHideRoot(): Boolean = true
                 override fun isHideXposed(): Boolean = true
                 override fun isEnableDaemonService(): Boolean = false
+                override fun isEnableLauncherActivity(): Boolean = false
 
                 override fun requestInstallPackage(file: File?): Boolean = false
             })

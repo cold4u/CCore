@@ -199,6 +199,12 @@ public class CCoreCore extends ClientConfiguration {
 
     public boolean launchApk(String packageName, int userId) {
         Intent launchIntentForPackage = getBPackageManager().getLaunchIntentForPackage(packageName, userId);
+        if (launchIntentForPackage == null && getContext() != null) {
+            try {
+                launchIntentForPackage = getContext().getPackageManager().getLaunchIntentForPackage(packageName);
+            } catch (Throwable ignored) {
+            }
+        }
         if (launchIntentForPackage == null) {
             return false;
         }

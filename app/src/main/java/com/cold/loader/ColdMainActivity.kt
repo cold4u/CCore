@@ -227,7 +227,7 @@ class ColdMainActivity : AppCompatActivity() {
         ColdOverlayService.start(this, selectedTarget.packageName)
 
         // 3. Launch the game in CCore sandbox process :p0
-        val launched = ColdCloner.launch(selectedTarget.packageName, 0)
+        val launched = ColdCloner.launch(this, selectedTarget.packageName, 0)
         if (launched) {
             Toast.makeText(this, "Launched ${selectedTarget.title} in Slot :p0", Toast.LENGTH_SHORT).show()
             moveTaskToBack(true)

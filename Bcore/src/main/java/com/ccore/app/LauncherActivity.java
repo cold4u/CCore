@@ -29,7 +29,11 @@ public class LauncherActivity extends Activity {
         splash.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 
         splash.putExtra(LauncherActivity.KEY_INTENT, intent);
-        splash.putExtra(LauncherActivity.KEY_PKG, intent.getPackage());
+        String pkg = intent.getPackage();
+        if (pkg == null && intent.getComponent() != null) {
+            pkg = intent.getComponent().getPackageName();
+        }
+        splash.putExtra(LauncherActivity.KEY_PKG, pkg);
         splash.putExtra(LauncherActivity.KEY_USER_ID, userId);
         CCoreCore.getContext().startActivity(splash);
     }
