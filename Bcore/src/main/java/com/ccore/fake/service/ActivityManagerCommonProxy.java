@@ -76,8 +76,25 @@ public class ActivityManagerCommonProxy {
                         StartActivityCompat.getResolvedType(args),
                         BActivityThread.getUserId());
                 if (resolveInfo == null) {
-                    intent.setPackage(origPackage);
-                    return method.invoke(who, args);
+                    String targetPkg = intent.getPackage() != null ? intent.getPackage() : (intent.getComponent() != null ? intent.getComponent().getPackageName() : BActivityThread.getAppPackageName());
+                    if (targetPkg != null && (targetPkg.equals(BActivityThread.getAppPackageName()) || CCoreCore.get().isInstalled(targetPkg, BActivityThread.getUserId()))) {
+                        Intent fallbackIntent = CCoreCore.getBPackageManager().getLaunchIntentForPackage(targetPkg, BActivityThread.getUserId());
+                        if (fallbackIntent != null) {
+                            resolveInfo = CCoreCore.getBPackageManager().resolveActivity(
+                                    fallbackIntent,
+                                    GET_META_DATA,
+                                    StartActivityCompat.getResolvedType(args),
+                                    BActivityThread.getUserId());
+                        }
+                    }
+                    if (resolveInfo == null) {
+                        if (targetPkg != null && (targetPkg.equals(BActivityThread.getAppPackageName()) || CCoreCore.get().isInstalled(targetPkg, BActivityThread.getUserId()))) {
+                            Slog.e(TAG, "Prevented leak to host for virtual package: " + targetPkg);
+                            return 0;
+                        }
+                        intent.setPackage(origPackage);
+                        return method.invoke(who, args);
+                    }
                 }
             }
 

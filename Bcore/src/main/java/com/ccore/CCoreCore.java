@@ -420,10 +420,10 @@ public class CCoreCore extends ClientConfiguration {
 
     private void startLogcat() {
         new Thread(() -> {
-            File file = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS), getContext().getPackageName() + "_logcat.txt");
-            FileUtils.deleteDir(file);
-            ShellUtils.execCommand("logcat -c", false);
-            ShellUtils.execCommand("logcat -f " + file.getAbsolutePath(), false);
+            try {
+                File file = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS), getContext().getPackageName() + "_logcat.txt");
+                ShellUtils.execCommand("logcat -d -f " + file.getAbsolutePath(), false);
+            } catch (Throwable ignored) {}
         }).start();
     }
 

@@ -133,6 +133,8 @@ public class IOCore {
 
                 blackRule.add("/sdcard/Pictures");
                 blackRule.add(String.format("/storage/emulated/%d/Pictures", systemUserId));
+                blackRule.add("/sdcard/Android/obb");
+                blackRule.add(String.format("/storage/emulated/%d/Android/obb", systemUserId));
             }
             if (GmsCore.isGooglePackage(packageName)) {
                 int userId = BActivityThread.getUserId();

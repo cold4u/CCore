@@ -248,7 +248,7 @@ public class HCallbackProxy implements IInjectHook, Handler.Callback {
     private void checkActivityClient() {
         try {
             Object activityClientController = BRActivityClient.get().getActivityClientController();
-            if (!(activityClientController instanceof Proxy)) {
+            if (activityClientController != null && !(activityClientController instanceof Proxy)) {
                 IActivityClientProxy iActivityClientProxy = new IActivityClientProxy(activityClientController);
                 iActivityClientProxy.onlyProxy(true);
                 iActivityClientProxy.injectHook();

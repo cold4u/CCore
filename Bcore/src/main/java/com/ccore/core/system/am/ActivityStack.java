@@ -322,6 +322,12 @@ public class ActivityStack {
                     resolvedType, resultTo, resultWho, requestCode, flags, null, options);
         } catch (Throwable e) {
             e.printStackTrace();
+            try {
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                CCoreCore.getContext().startActivity(intent);
+            } catch (Throwable t2) {
+                t2.printStackTrace();
+            }
         }
         return 0;
     }
