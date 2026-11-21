@@ -127,7 +127,10 @@ public class GmsCore {
         }
         removeLegacyGoogleAuthCallerCategories(intent);
         if (android.os.Build.VERSION.SDK_INT >= 29) {
-            intent.setIdentifier("android-app://" + callerPackage);
+            try {
+                intent.getClass().getMethod("setIdentifier", String.class).invoke(intent, "android-app://" + callerPackage);
+            } catch (Throwable ignored) {
+            }
         }
     }
 

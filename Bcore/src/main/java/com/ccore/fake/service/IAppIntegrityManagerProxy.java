@@ -1,5 +1,6 @@
 package com.ccore.fake.service;
 
+import android.os.IBinder;
 import black.android.os.BRServiceManager;
 import com.ccore.fake.hook.BinderInvocationStub;
 import com.ccore.fake.hook.MethodHook;
@@ -64,8 +65,14 @@ public class IAppIntegrityManagerProxy extends BinderInvocationStub {
     }
 
     @Override
-    public Object getWho() {
-        return getSystemInterface(SERVICE_NAME, "android.content.integrity.IAppIntegrityManager$Stub");
+    protected Object getWho() {
+        try {
+            Class<?> stub = Class.forName("android.content.integrity.IAppIntegrityManager$Stub");
+            Method asInterface = stub.getMethod("asInterface", IBinder.class);
+            return asInterface.invoke(null, BRServiceManager.get().getService(SERVICE_NAME));
+        } catch (Throwable t) {
+            return null;
+        }
     }
 
     @Override
